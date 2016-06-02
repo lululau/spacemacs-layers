@@ -62,5 +62,5 @@ Each entry is either:
   (use-package projectile-rails-robe
     :defer t)
   (autoload 'projectile-rails-robe-mode "projectile-rails-robe")
-  (add-hook 'robe-mode-hook 'projectile-rails-robe-mode))
+  (add-hook 'robe-mode-hook #'(lambda () (if projectile-rails-mode (projectile-rails-robe-mode)))))
 ;;; packages.el ends here
