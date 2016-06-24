@@ -1,8 +1,8 @@
-;;; packages.el --- projectile-rails-robe layer packages file for Spacemacs.
+;;; packages.el --- projectile-bundler layer packages file for Spacemacs.
 ;;
 ;; Copyright (c) 2012-2016 Sylvain Benner & Contributors
 ;;
-;; Author: 刘向 <liuxiang@liuxiangdeMacBookAir>
+;; Author: 刘向 <liuxiang@ktjr.com>
 ;; URL: https://github.com/syl20bnr/spacemacs
 ;;
 ;; This file is not part of GNU Emacs.
@@ -18,20 +18,20 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `projectile-rails-robe-packages'. Then, for each package PACKAGE:
+;; added to `projectile-bundler-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `projectile-rails-robe/init-PACKAGE' to load and initialize the package.
+;;   function `projectile-bundler/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `projectile-rails-robe/pre-init-PACKAGE' and/or
-;;   `projectile-rails-robe/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `projectile-bundler/pre-init-PACKAGE' and/or
+;;   `projectile-bundler/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst projectile-rails-robe-packages
-  '((projectile-rails-robe :location local))
-  "The list of Lisp packages required by the projectile-rails-robe layer.
+(defconst projectile-bundler-packages
+  '((projectile-bundler :location local))
+  "The list of Lisp packages required by the projectile-bundler layer.
 
 Each entry is either:
 
@@ -58,9 +58,12 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun projectile-rails-robe/init-projectile-rails-robe ()
-  (use-package projectile-rails-robe
-    :defer t)
-  (autoload 'projectile-rails-robe-mode "projectile-rails-robe")
-  (add-hook 'robe-mode-hook #'(lambda () (if projectile-rails-mode (projectile-rails-robe-mode)))))
+(defun projectile-bundler/init-projectile-bundler ()
+  (add-hook 'projectile-mode-hook 'projectile-bundler-on)
+  (spacemacs/set-leader-keys-for-minor-mode 'projectile-bundler-mode "bs" 'projectile-bundler-console)
+  (use-package projectile-bundler
+    :defer t
+    :init
+    (autoload 'projectile-bundler-on "projectile-bundler")))
+
 ;;; packages.el ends here
