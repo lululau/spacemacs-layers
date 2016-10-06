@@ -59,7 +59,7 @@ Each entry is either:
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
 (defun projectile-bundler/init-projectile-bundler ()
-  (add-hook 'projectile-mode-hook 'projectile-bundler-on)
+  (add-hook 'after-change-major-mode-hook 'projectile-bundler-on)
   (spacemacs/set-leader-keys-for-minor-mode 'projectile-bundler-mode "bs" 'projectile-bundler-console)
   (use-package projectile-bundler
     :defer t
