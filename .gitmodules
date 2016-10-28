@@ -1,0 +1,3 @@
+[submodule "org-jira"]
+	path = org-jira
+	url = git@github.com:lululau/org-jira.git
