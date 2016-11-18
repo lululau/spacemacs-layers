@@ -18,18 +18,18 @@
 ;;
 ;;
 ;; Briefly, each package to be installed or configured by this layer should be
-;; added to `confluence-packages'. Then, for each package PACKAGE:
+;; added to `confluence-lx-packages'. Then, for each package PACKAGE:
 ;;
 ;; - If PACKAGE is not referenced by any other Spacemacs layer, define a
-;;   function `confluence/init-PACKAGE' to load and initialize the package.
+;;   function `confluence-lx/init-PACKAGE' to load and initialize the package.
 
 ;; - Otherwise, PACKAGE is already referenced by another Spacemacs layer, so
-;;   define the functions `confluence/pre-init-PACKAGE' and/or
-;;   `confluence/post-init-PACKAGE' to customize the package as it is loaded.
+;;   define the functions `confluence-lx/pre-init-PACKAGE' and/or
+;;   `confluence-lx/post-init-PACKAGE' to customize the package as it is loaded.
 
 ;;; Code:
 
-(defconst confluence-packages
+(defconst confluence-lx-packages
   '((confluence-edit :location local)
     (ox-confluence :location local))
   "The list of Lisp packages required by the confluence layer.
@@ -59,12 +59,12 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(defun confluence/init-confluence-edit ()
+(defun confluence-lx/init-confluence-edit ()
   (use-package confluence-edit
     :defer t)
   (autoload 'confluence-edit-mode "confluence-edit"))
 
-(defun confluence/init-ox-confluence ()
+(defun confluence-lx/init-ox-confluence ()
   (add-hook 'org-mode-hook #'(lambda () (require 'ox-confluence)))
   (use-package ox-confluence
     :defer t))
