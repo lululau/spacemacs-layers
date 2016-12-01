@@ -6,7 +6,7 @@
 (defvar projectile-bundler-robe-port-hash-table (make-hash-table :test 'equal))
 
 (defun projectile-bundler-robe-get-port ()
-  (let* ((projectile-bundler-root (or (projectile-bundler-root) (and inf-ruby-buffer (with-current-buffer (get-buffer inf-ruby-buffer) (projectile-bundler-root)))))
+  (let* ((projectile-bundler-root (or (projectile-bundler-root) (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root)))))
          (port (gethash projectile-bundler-root projectile-bundler-robe-port-hash-table)))
     (or port
         (puthash projectile-bundler-root
@@ -15,7 +15,7 @@
                        robe-port)) projectile-bundler-robe-port-hash-table))))
 
 (defun robe-port ()
-  (if (or (projectile-bundler-root) (and inf-ruby-buffer (with-current-buffer (get-buffer inf-ruby-buffer) (projectile-bundler-root))))
+  (if (or (projectile-bundler-root) (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root))))
       (projectile-bundler-robe-get-port)
     robe-port))
 
@@ -24,30 +24,30 @@
 (defvar projectile-bundler-robe-running-hash-table (make-hash-table :test 'equal))
 
 (defun projectile-bundler-robe-get-running ()
-  (let ((projectile-bundler-root (or (projectile-bundler-root) (and inf-ruby-buffer (with-current-buffer (get-buffer inf-ruby-buffer) (projectile-bundler-root))))))
+  (let ((projectile-bundler-root (or (projectile-bundler-root) (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root))))))
    (gethash projectile-bundler-root projectile-bundler-robe-running-hash-table)))
 
 (defun projectile-bundler-robe-set-running (val)
-  (let ((projectile-bundler-root (or (projectile-bundler-root) (and inf-ruby-buffer (with-current-buffer (get-buffer inf-ruby-buffer) (projectile-bundler-root))))))
+  (let ((projectile-bundler-root (or (projectile-bundler-root) (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root))))))
     (puthash projectile-bundler-root val projectile-bundler-robe-running-hash-table)))
 
 (defun robe-running ()
-  (if (or (projectile-bundler-root) (and inf-ruby-buffer (with-current-buffer (get-buffer inf-ruby-buffer) (projectile-bundler-root))))
+  (if (or (projectile-bundler-root) (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root))))
       (projectile-bundler-robe-get-running)
     robe-running))
 
 (defun set-robe-running (val)
-  (if (or (projectile-bundler-root) (and inf-ruby-buffer (with-current-buffer (get-buffer inf-ruby-buffer) (projectile-bundler-root))))
+  (if (or (projectile-bundler-root) (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root))))
       (projectile-bundler-robe-set-running val)
     (setq robe-running val)))
 
 (defun run-pry()
   (interactive)
-  (if (and (boundp 'inf-ruby-buffer)
-           (equal inf-ruby-buffer (buffer-name)))
+  (if (and (inf-ruby-buffer)
+           (equal (inf-ruby-buffer) (buffer-name)))
       (delete-window)
-    (if (or (not (boundp 'inf-ruby-buffer))
-            (not (comint-check-proc inf-ruby-buffer)))
+    (if (or (not (inf-ruby-buffer))
+            (not (comint-check-proc (inf-ruby-buffer))))
         (rvm-use-default))
     (call-interactively 'inf-ruby)))
 
@@ -61,8 +61,8 @@
       (format "**%srailsconsole**" (projectile-project-name))
     (if (projectile-bundler-root)
         (format "**%sbundleconsole**" (projectile-project-name))
-    (if (and inf-ruby-buffer (with-current-buffer (get-buffer inf-ruby-buffer) (projectile-bundler-root)))
-        inf-ruby-buffer))))
+    (if (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root)))
+        (inf-ruby-buffer)))))
 
 (defun projectile-inf-ruby-proc()
   (if (projectile-rails-root)
