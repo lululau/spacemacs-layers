@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst org-yank-image-packages
-  '((org-yank-image :location local))
+  '((org-yank-image :location local) org)
   "The list of Lisp packages required by the org-yank-image layer.
 
 Each entry is either:
@@ -61,12 +61,14 @@ Each entry is either:
 (defun org-yank-image/init-org-yank-image ()
   ;; (add-hook 'org-mode-hook #'(lambda ()
   ;;                              (define-key org-mode-map (kbd "s-v") #'org-yank-image/yank)))
-  (spacemacs|use-package-add-hook org
-    :post-config
-    (define-key org-mode-map (kbd "s-v") #'org-yank-image/yank))
   (use-package org-yank-image
     :defer t
     :init
     (autoload 'org-yank-image/yank "org-yank-image")))
+
+(defun org-yank-image/pre-init-org ()
+  (spacemacs|use-package-add-hook org
+    :post-config
+    (define-key org-mode-map (kbd "s-v") #'org-yank-image/yank)))
 
 ;;; packages.el ends here
