@@ -1,7 +1,7 @@
 (require 'robe)
 (require 'projectile-bundler)
 
-(setq robe-port 24969)
+(setq default-robe-port 24969)
 
 (defvar projectile-bundler-robe-port-hash-table (make-hash-table :test 'equal))
 
@@ -12,12 +12,12 @@
         (puthash projectile-bundler-root
                  (1+ (if (hash-table-keys projectile-bundler-robe-port-hash-table)
                          (apply 'max (hash-table-values projectile-bundler-robe-port-hash-table))
-                       robe-port)) projectile-bundler-robe-port-hash-table))))
+                       default-robe-port)) projectile-bundler-robe-port-hash-table))))
 
 (defun robe-port ()
   (if (or (projectile-bundler-root) (and (inf-ruby-buffer) (with-current-buffer (get-buffer (inf-ruby-buffer)) (projectile-bundler-root))))
       (projectile-bundler-robe-get-port)
-    robe-port))
+    default-robe-port))
 
 (defvar robe-running nil)
 
