@@ -62,6 +62,7 @@ Each entry is either:
   (use-package ragtag
     :defer t)
   (autoload 'ragtag-mode "ragtag")
+  (add-hook 'nxml-mode-hook 'ragtag-mode)
   (add-hook 'web-mode-hook 'ragtag-mode)
   (add-hook 'html-erb-mode-hook 'ragtag-mode))
 

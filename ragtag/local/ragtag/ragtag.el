@@ -89,6 +89,7 @@
 (define-key ragtag-mode-map (kbd "C-x \"") #'ragtag/wrap-comment-mark)
 (define-key ragtag-mode-map (kbd "C-x SPC") #'ragtag/wrap-inline-tag)
 (define-key ragtag-mode-map (kbd "C-x <return>") #'ragtag/wrap-multiline-tag)
+(define-key ragtag-mode-map (kbd "C-x RET") #'ragtag/wrap-multiline-tag)
 (define-key ragtag-mode-map (kbd "C-x !") #'ragtag/insert-doctype-tag)
 (define-key ragtag-mode-map (kbd "C-x @") #'ragtag/insert-link-tag)
 (define-key ragtag-mode-map (kbd "C-x $") #'ragtag/insert-js-mark)
