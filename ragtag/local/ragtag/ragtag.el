@@ -44,14 +44,14 @@
 
 (defun ragtag/wrap-inline-tag ()
   (interactive)
-  (let ((tag-name (thing-at-point 'symbol)) (symbol-bounds (bounds-of-thing-at-point 'symbol)))
+  (let ((tag-name (thing-at-point 'filename)) (symbol-bounds (bounds-of-thing-at-point 'filename)))
     (delete-region (car symbol-bounds) (cdr symbol-bounds))
     (insert (format "<%s>" tag-name))
     (save-excursion (insert (format "</%s>" tag-name)))))
 
 (defun ragtag/wrap-multiline-tag ()
   (interactive)
-  (let ((tag-name (thing-at-point 'symbol)) (symbol-bounds (bounds-of-thing-at-point 'symbol)))
+  (let ((tag-name (thing-at-point 'filename)) (symbol-bounds (bounds-of-thing-at-point 'filename)))
     (delete-region (car symbol-bounds) (cdr symbol-bounds))
     (insert (format "<%s>" tag-name))
     (save-excursion (insert (format "</%s>" tag-name))) (save-excursion (newline-and-indent)) (newline-and-indent)
