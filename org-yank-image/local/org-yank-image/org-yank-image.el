@@ -29,7 +29,7 @@
 
 ;;;###autoload
 (defun org-yank-image/insert-link (file-path)
-  (insert (format "[[%s]]" file-path))
+  (insert (format "[[file:%s]]" file-path))
   )
 
 ;;;###autoload
