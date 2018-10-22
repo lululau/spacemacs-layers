@@ -1,3 +1,6 @@
 [submodule "org-jira"]
 	path = org-jira
 	url = git@github.com:lululau/org-jira.git
+[submodule "lsp-intellij"]
+	path = lsp-intellij
+	url = git@github.com:Ruin0x11/lsp-intellij-spacemacs.git
