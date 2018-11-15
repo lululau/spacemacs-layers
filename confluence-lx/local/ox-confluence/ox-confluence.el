@@ -157,7 +157,7 @@
   (format "+%s+" contents))
 
 (defun org-confluence--block (language theme contents)
-  (concat "\{code:theme=" theme "|borderStyle=solid|bgColor=#0e1829"
+  (concat "\{code:theme=" theme "|borderStyle=solid"
           (when language (format "|language=%s" language))
           "}\n"
           contents
