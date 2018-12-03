@@ -225,8 +225,8 @@
 
 (defun insert-translated-name-active (style)
   ;; Enable pyim if user has load it.
-  (when (featurep 'pyim)
-    (activate-input-method "pyim"))
+  ;; (when (featurep 'pyim)
+  ;;   (activate-input-method "pyim"))
 
   ;; Add monitor hook.
   (add-hook 'after-change-functions 'insert-translated-name-monitor-after-change nil t)
@@ -254,8 +254,8 @@
 (defun insert-translated-name-inactive (&optional keep-style)
   (interactive)
   ;; Disable pyim if user has load it.
-  (when (featurep 'pyim)
-    (deactivate-input-method))
+  ;; (when (featurep 'pyim)
+  ;;   (deactivate-input-method))
 
   ;; Delete active overlay.
   (when (and (boundp 'insert-translated-name-active-overlay)
