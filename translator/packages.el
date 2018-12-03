@@ -61,7 +61,7 @@ Each entry is either:
 (defun translator/init-insert-translated-name ()
   (use-package insert-translated-name
     :defer t)
-  (autoload 'insert-translated-name-insert "insert-translated-name")
-  (spacemacs/set-leader-keys "tT" 'insert-translated-name-insert))
+  (autoload 'insert-translated-name-replace "insert-translated-name")
+  (spacemacs/set-leader-keys "tT" 'insert-translated-name-replace))
 
 ;;; packages.el ends here

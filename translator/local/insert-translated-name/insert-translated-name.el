@@ -185,6 +185,11 @@
 
 (defun insert-translated-name-replace ()
   (interactive)
+
+  ;; Make sure build hash to contain placeholder.
+  (unless (boundp 'insert-translated-name-placeholder-hash)
+    (set (make-local-variable 'insert-translated-name-placeholder-hash) (make-hash-table :test 'equal)))
+
   (insert-translated-name-replace-symbol
    (cond ((insert-translated-name-match-modes insert-translated-name-line-style-mode-list)
           "line")
@@ -193,7 +198,7 @@
          ((insert-translated-name-match-modes insert-translated-name-underline-style-mode-list)
           "underline")
          (t
-          "underline"))))
+          "origin"))))
 
 (defun insert-translated-name-replace-with-line ()
   (interactive)
@@ -391,7 +396,7 @@ If no parse state is supplied, compute one from the beginning of the
     (re-search-forward (format "\n\n"))
     (delete-region (point-min) (point))
     (prog1
-        (setq translation (elt (elt (elt (json-read-from-string (buffer-string)) 0) 0) 0))
+        (setq translation (mapconcat (lambda (x) (elt x 0)) (seq-filter (lambda (x) (elt x 0)) (elt (json-read-from-string (buffer-string)) 0)) " "))
       (kill-buffer))
 
     ;; Insert result with placeholder point.
