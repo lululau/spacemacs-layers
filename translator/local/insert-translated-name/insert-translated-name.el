@@ -130,13 +130,13 @@
   '(text-mode))
 
 (defvar insert-translated-name-line-style-mode-list
-  '(web-mode emacs-lisp-mode))
+  '(web-mode emacs-lisp-mode yaml-mode clojure-mode pug-mode))
 
 (defvar insert-translated-name-camel-style-mode-list
-  '(js-mode))
+  '(js-mode java-mode scala-mode kotlin-mode))
 
 (defvar insert-translated-name-underline-style-mode-list
-  '(ruby-mode))
+  '(ruby-mode perl-mode sh-mode c-mode c++-mode sql-mode nginx-mode))
 
 (defvar insert-translated-name-translate-engine "google"
   "The translate engine can use \"google\" or \"youdao\".")
