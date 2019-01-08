@@ -4,3 +4,6 @@
 [submodule "lsp-intellij"]
 	path = lsp-intellij
 	url = git@github.com:Ruin0x11/lsp-intellij-spacemacs.git
+[submodule "vue"]
+	path = vue
+	url = git@github.com:lululau/vue-layer.git
