@@ -19,11 +19,12 @@
     (format "./%s" (file-relative-name (read-file-name "Save to file: " default-dir nil nil default-file) default-directory))))
 
 ;;;###autoload
-(defun org-yank-image/write-to-file (img-data path)
+(defun org-yank-image/write-to-file (path)
   (make-directory (file-name-directory path) t)
   (let* ((temp-file (make-temp-file "org-yank-image"))
-         (cmd (format "sips %s --setProperty format %s --out %s" temp-file (file-name-extension path) (shell-quote-argument (expand-file-name path)))))
-    (f-write-bytes img-data temp-file)
+         (cmd (format "convert -resize '50%%x50%%!' %s %s" temp-file  (shell-quote-argument (expand-file-name path)))))
+         ;; (cmd (format "cp %s %s" temp-file  (shell-quote-argument (expand-file-name path)))))
+    (shell-command (format "pngpaste %s" temp-file))
     (call-process-shell-command cmd)
     (delete-file temp-file)))
 
@@ -33,19 +34,15 @@
   )
 
 ;;;###autoload
-(defun org-yank-image/write-and-insert (img)
-  (let* ((file-path (org-yank-image/get-file)))
-    (org-yank-image/write-to-file (plist-get (cdr img) :data) file-path)
+(defun org-yank-image/write-and-insert ()
+  (let ((file-path (org-yank-image/get-file)))
+    (org-yank-image/write-to-file file-path)
     (org-yank-image/insert-link file-path)
     (org-display-inline-images nil)))
 
 ;;;###autoload
 (defun org-yank-image/yank ()
   (interactive)
-  (let* ((pboard-item (current-kill 0 t))
-         (img (get-text-property 0 'display pboard-item)))
-    (if img
-        (org-yank-image/write-and-insert img)
-      (call-interactively 'yank))))
+  (org-yank-image/write-and-insert))
 
 (provide 'org-yank-image)
