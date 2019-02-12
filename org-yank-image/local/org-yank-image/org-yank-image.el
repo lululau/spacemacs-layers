@@ -43,6 +43,10 @@
 ;;;###autoload
 (defun org-yank-image/yank ()
   (interactive)
-  (org-yank-image/write-and-insert))
+  (let* ((pboard-item (current-kill 0 t))
+         (img (get-text-property 0 'display pboard-item)))
+    (if img
+        (org-yank-image/write-and-insert)
+      (call-interactively 'yank))))
 
 (provide 'org-yank-image)
