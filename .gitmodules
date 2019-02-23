@@ -1,9 +1,9 @@
 [submodule "org-jira"]
 	path = org-jira
-	url = git@github.com:lululau/org-jira.git
+	url = https://github.com/lululau/org-jira.git
 [submodule "lsp-intellij"]
 	path = lsp-intellij
-	url = git@github.com:Ruin0x11/lsp-intellij-spacemacs.git
+	url = https://github.com/Ruin0x11/lsp-intellij-spacemacs.git
 [submodule "vue"]
 	path = vue
-	url = git@github.com:lululau/vue-layer.git
+	url = https://github.com/lululau/vue-layer.git
