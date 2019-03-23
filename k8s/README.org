@@ -1,0 +1,27 @@
+#+TITLE: k8s layer
+
+
+* Table of Contents                                       :TOC_4_gh:noexport:
+- [[#description][Description]]
+  - [[#features][Features:]]
+- [[#install][Install]]
+- [[#key-bindings][Key bindings]]
+
+* Description
+This layer adds support for k8s
+
+** Features:
+  - k8s-mode
+  - kubernetes
+
+* Install
+To use this configuration layer, add it to your =~/.spacemacs=. You will need to
+add =k8s= to the existing =dotspacemacs-configuration-layers= list in this
+file.
+
+* Key bindings
+
+| Key Binding | Description  |
+|-------------+--------------|
+| ~SPC a K~   | launch kubernetes-overview |
+
