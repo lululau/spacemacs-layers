@@ -45,6 +45,7 @@
   (with-eval-after-load 'kubernetes-overview
     (evilified-state-evilify kubernetes-overview-mode kubernetes-overview-mode-map
       (kbd "v") 'kubernetes-overview-set-sections
+      (kbd "r") 'kubernetes-refresh
       (kbd "l") 'kubernetes-logs-popup))
 
   (with-eval-after-load 'kubernetes-commands
