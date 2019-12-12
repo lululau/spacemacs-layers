@@ -4,6 +4,6 @@
 [submodule "lsp-intellij"]
 	path = lsp-intellij
 	url = https://github.com/Ruin0x11/lsp-intellij-spacemacs.git
-[submodule "vue"]
-	path = vue
+[submodule "myvue"]
+	path = myvue
 	url = https://github.com/lululau/vue.git
