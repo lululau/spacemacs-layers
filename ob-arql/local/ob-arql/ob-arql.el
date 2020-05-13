@@ -62,7 +62,7 @@
   "Execute a block of Ruby code with Babel.
 This function is called by `org-babel-execute-src-block'."
   (let* ((session (org-babel-arql-initiate-session
-		   (cdr (assq :session params))))
+		   (cdr (assq :session params)) params))
          (result-params (cdr (assq :result-params params)))
          (result-type (cdr (assq :result-type params)))
          (full-body (org-babel-expand-body:generic
@@ -87,7 +87,7 @@ This function is called by `org-babel-execute-src-block'."
 (defun org-babel-prep-session:arql (session params)
   "Prepare SESSION according to the header arguments specified in PARAMS."
   ;; (message "params=%S" params) ;; debugging
-  (let* ((session (org-babel-arql-initiate-session session))
+  (let* ((session (org-babel-arql-initiate-session session params))
          (var-lines (org-babel-variable-assignments:arql params)))
     (org-babel-comint-in-buffer session
       (sit-for .5) (goto-char (point-max))
@@ -138,15 +138,15 @@ Emacs-lisp table, otherwise return the results as a string."
                 res)
       res)))
 
-(defun org-babel-arql-initiate-session (&optional session _params)
+(defun org-babel-arql-initiate-session (&optional session params)
   "Initiate a ruby session.
 If there is not a current inferior-process-buffer in SESSION
 then create one.  Return the initialized session."
   (unless (string= session "none")
     (require 'inf-ruby)
-    (let* ((cmd (cdr (assoc inf-ruby-default-implementation
-			    inf-ruby-implementations)))
-	   ;; (buffer (get-buffer (format "*%s*" session)))
+    (let* ((options (cdr (assoc :options params)))
+           (cmd (format "%s %s"(cdr (assoc "arql" inf-ruby-implementations)) options))
+           ;; (buffer (get-buffer (format "*%s*" session)))
            (buffer (get-buffer (buffer-name inf-ruby-buffer)))
 	   (session-buffer (or buffer (save-window-excursion
 					(run-ruby cmd session)
@@ -154,7 +154,7 @@ then create one.  Return the initialized session."
       (if (org-babel-comint-buffer-livep session-buffer)
 	  (progn (sit-for .25) session-buffer)
 	(sit-for .5)
-	(org-babel-arql-initiate-session session)))))
+	(org-babel-arql-initiate-session session params)))))
 
 (defvar org-babel-arql-eoe-indicator ":org_babel_arql_eoe"
   "String to indicate that evaluation has completed.")
