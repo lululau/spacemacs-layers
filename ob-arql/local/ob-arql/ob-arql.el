@@ -146,8 +146,7 @@ then create one.  Return the initialized session."
     (require 'inf-ruby)
     (let* ((options (cdr (assoc :options params)))
            (cmd (format "%s %s"(cdr (assoc "arql" inf-ruby-implementations)) options))
-           ;; (buffer (get-buffer (format "*%s*" session)))
-           (buffer (get-buffer (buffer-name inf-ruby-buffer)))
+           (buffer (get-buffer (format "*%s*" session)))
 	   (session-buffer (or buffer (save-window-excursion
 					(run-ruby cmd session)
 					(current-buffer)))))
