@@ -17,8 +17,6 @@
 ;;; 配置company-tabnine作为company的后端
 (defun tabnine/post-init-company-tabnine()
   (with-eval-after-load 'company
-    (add-to-list 'company-backends #'company-tabnine)
-    )
-  )
+    (add-to-list 'company-backends '(company-tabnine :with company-yasnippet))))
 
 ;;; packages.el ends here
