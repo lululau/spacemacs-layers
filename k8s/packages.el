@@ -30,7 +30,7 @@
 ;;; Code:
 
 (defconst k8s-packages
-  '(k8s-mode kubernetes))
+  '(k8s-mode kubernetes kubernetes-evil kubernetes-tramp))
 
 (defun k8s/init-k8s-mode ()
   (use-package k8s-mode))
@@ -38,9 +38,8 @@
 (defun k8s/init-kubernetes ()
   (use-package kubernetes
     :defer t
-    :init
-    (progn
-      (spacemacs/set-leader-keys "aK" 'kubernetes-overview)))
+    :commands (kubernetes-overview)
+    :init (progn (spacemacs/set-leader-keys "aK" 'kubernetes-overview)))
 
   (with-eval-after-load 'kubernetes-overview
     (evilified-state-evilify kubernetes-overview-mode kubernetes-overview-mode-map
@@ -58,5 +57,13 @@
         window))
     (defun kubernetes-commands-display-buffer-fullframe (buffer)
       (display-buffer buffer (list #'kubernetes--display-window-action)))))
+
+(defun k8s/init-kubernetes-evil ()
+  (use-package kubernetes-evil
+    :after kubernetes-overview))
+
+(defun k8s/init-kubernetes-tramp ()
+  (use-package kubernetes-tramp
+    :defer t))
 
 ;;; packages.el ends here
