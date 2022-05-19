@@ -175,7 +175,7 @@
                 (or (eq tag 'item) ; list items interleave with plain-list
                     (eq tag 'plain-list)))
       (when (eq tag 'item)
-        (incf depth))
+        (cl-incf depth))
       (setq item (org-export-get-parent item)))
     depth))
 
