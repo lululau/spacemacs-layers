@@ -45,9 +45,8 @@
 ;;;###autoload
 (defun org-yank-image/yank (prefix)
   (interactive "p")
-  (let* ((pboard-item (current-kill 0 t))
-         (img (get-text-property 0 'display pboard-item)))
-    (if img
+  (let* ((pboard-text (shell-command-to-string "pbpaste")))
+    (if (string= "" pboard-text)
         (org-yank-image/write-and-insert (eq prefix 4))
       (call-interactively 'yank))))
 
