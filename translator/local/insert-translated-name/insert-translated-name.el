@@ -384,7 +384,7 @@ If no parse state is supplied, compute one from the beginning of the
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;; Google API ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defconst insert-translated-name-google-api-url
-  "http://translate.google.cn/translate_a/single")
+  "http://translate.google.com/translate_a/single")
 
 (defconst insert-translated-name-google-translate-bit-v-len 32)
 
