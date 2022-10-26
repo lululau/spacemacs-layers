@@ -42,7 +42,7 @@
     :init (progn (spacemacs/set-leader-keys "aK" 'kubernetes-overview)))
 
   (with-eval-after-load 'kubernetes-overview
-    (evilified-state-evilify kubernetes-overview-mode kubernetes-overview-mode-map
+    (evilified-state-evilify-map kubernetes-overview-mode-map :mode kubernetes-overview-mode :bindings
       (kbd "v") 'kubernetes-overview-set-sections
       (kbd "r") 'kubernetes-refresh
       (kbd "l") 'kubernetes-logs-popup))
