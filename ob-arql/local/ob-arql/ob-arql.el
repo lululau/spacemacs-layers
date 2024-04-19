@@ -145,7 +145,7 @@ then create one.  Return the initialized session."
   (unless (string= session "none")
     (require 'inf-ruby)
     (let* ((options (cdr (assoc :options params)))
-           (cmd (format "%s %s"(cdr (assoc "arql" inf-ruby-implementations)) options))
+           (cmd (format "%s -b %s"(cdr (assoc "arql" inf-ruby-implementations)) options))
            (buffer (get-buffer (format "*%s*" session)))
 	   (session-buffer (or buffer (save-window-excursion
 					(run-ruby cmd session)
@@ -184,7 +184,7 @@ end
 
 (defun org-babel-arql-build-command (params)
   (let* ((options (cdr (assoc :options params))))
-    (format "%s %s" org-babel-arql-command options)))
+    (format "%s -b %s" org-babel-arql-command options)))
 
 (defun org-babel-arql-evaluate
     (buffer body &optional result-type result-params params)
