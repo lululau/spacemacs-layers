@@ -1,6 +1,7 @@
 ;;;###autoload
 (defun org-yank-image/default-dir ()
-  (format "%s/media" (file-name-base (buffer-file-name))))
+  (format "%s%smedia" (file-name-base (buffer-file-name))
+          (if (file-name-extension (buffer-file-name)) "/" "-")))
 
 ;;;###autoload
 (defun org-yank-image/default-file (dir)
